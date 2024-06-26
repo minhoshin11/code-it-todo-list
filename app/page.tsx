@@ -1,95 +1,90 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import { useEffect, useState } from "react";
+import instance from "./api/axios";
+import { getItems } from "./api/function";
+import Nav from "./components/nav/nav";
+import PostInput from "./components/post-input/post-input";
+import styles from "./page.module.css";
+
+export interface GetDataName {
+  id: number;
+  name: string;
+  isCompleted: boolean;
+}
 
 export default function Home() {
+  const [getData, setGetData] = useState<GetDataName[] | null>(null);
+  const [checkItem, setCheckItem] = useState<number>(0);
+  const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    getItems(setGetData);
+  }, []);
+  console.log(getData, "겟데이터임");
+
+  async function checkList(dataId: number) {
+    try {
+      const id: string = "신민호";
+      const response = await instance.patch(`${id}/items/${dataId}`, {
+        isCompleted: true,
+      });
+      console.log(response.data);
+    } catch {
+      console.log("체크 실패!");
+    }
+  }
+  console.log(checkItem, "체크 아이템");
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <Nav />
+      <div className={styles.postWrapper}>
+        <PostInput />
+        <div className={styles.listWrapper}>
+          <div className={styles.leftMyTodo}>
+            <div className={styles.todo}>TO DO</div>
+            {Array.isArray(getData) &&
+              getData.map(
+                (data: GetDataName) =>
+                  data.isCompleted === false && (
+                    <div key={data.id} className={styles.leftMyTodo}>
+                      <div className={styles.contentWrapper}>
+                        <div
+                          className={styles.checkBox}
+                          onClick={() => {
+                            checkList(data.id);
+                          }}
+                        ></div>
+                        <div>{data.name}</div>
+                      </div>
+                    </div>
+                  )
+              )}
+          </div>
+
+          <div className={styles.RightMyTodo}>
+            <div className={styles.todo}>Done</div>
+            {Array.isArray(getData) &&
+              getData.map(
+                (data: GetDataName) =>
+                  data.isCompleted === true && (
+                    <div key={data.id} className={styles.rightMyTodo}>
+                      <div className={styles.contentWrapper}>
+                        <div
+                          className={styles.checkBox}
+                          onClick={() => {
+                            checkList(data.id);
+                          }}
+                        ></div>
+                        <div>{data.name}</div>
+                      </div>
+                    </div>
+                  )
+              )}
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </div>
+  );
 }

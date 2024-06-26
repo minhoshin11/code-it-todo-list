@@ -1,0 +1,23 @@
+.postInputContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  width: 100vw;
+}
+
+.postInput {
+  width: 80vw;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  border: 1px solid black;
+  margin-right: 2vw;
+}
+
+.postSubmit {
+  width: 9vw;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  border: 1px solid black;
+}
