@@ -32,7 +32,6 @@ export default function PostInput() {
         />
         <input className={styles.postSubmit} type="submit" value="+ 추가하기" />
       </form>
-      {/* {response && <div>응답: {JSON.stringify(response)}</div>} */}
       {/* 응답 출력 */}
     </div>
   );

@@ -1,0 +1,71 @@
+.detailContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contentName {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.postContentWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  margin-top: 20px;
+}
+.imgWrapper,
+.textWrapper {
+  box-sizing: border-box;
+  width: 44vw;
+  height: 30vh;
+  border: 1px solid black;
+}
+
+.imgWrapper {
+}
+
+.textWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailInput {
+  font-size: 20px;
+  width: auto;
+  height: auto;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  justify-content: right;
+  gap: 10px;
+}
+
+.buttonWrapper div {
+  margin-top: 10px;
+  display: flex;
+  width: 100px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 10px;
+}

@@ -1,6 +1,6 @@
 .navContainer {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 4vh;
   align-items: center;
   padding-left: 30px;
@@ -8,4 +8,9 @@
   color: #7c3aed;
   font-size: 20px;
   font-weight: bold;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+}
+.navContainer :hover {
+  cursor: pointer;
 }

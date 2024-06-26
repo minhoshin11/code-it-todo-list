@@ -55,6 +55,11 @@
   background-color: #f7f8e0;
 }
 
+.dataName:hover,
+.checkBox:hover {
+  cursor: pointer;
+}
+
 .RightMyTodo Todo {
   background-color: black;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import instance from "./api/axios";
 import { getItems } from "./api/function";
@@ -17,24 +18,25 @@ export default function Home() {
   const [getData, setGetData] = useState<GetDataName[] | null>(null);
   const [checkItem, setCheckItem] = useState<number>(0);
   const [checked, setChecked] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     getItems(setGetData);
   }, []);
   console.log(getData, "겟데이터임");
 
-  async function checkList(dataId: number) {
+  async function checkList(isCompleted: any, dataId: number) {
+    const completed = isCompleted ? false : true;
     try {
       const id: string = "신민호";
       const response = await instance.patch(`${id}/items/${dataId}`, {
-        isCompleted: true,
+        isCompleted: completed,
       });
       console.log(response.data);
     } catch {
       console.log("체크 실패!");
     }
   }
-  console.log(checkItem, "체크 아이템");
 
   return (
     <div>
@@ -53,10 +55,17 @@ export default function Home() {
                         <div
                           className={styles.checkBox}
                           onClick={() => {
-                            checkList(data.id);
+                            checkList(data.isCompleted, data.id);
                           }}
                         ></div>
-                        <div>{data.name}</div>
+                        <div
+                          className={styles.dataName}
+                          onClick={() => {
+                            router.push(`detail/${data.id}`);
+                          }}
+                        >
+                          {data.name}
+                        </div>
                       </div>
                     </div>
                   )
@@ -74,10 +83,17 @@ export default function Home() {
                         <div
                           className={styles.checkBox}
                           onClick={() => {
-                            checkList(data.id);
+                            checkList(data.isCompleted, data.id);
                           }}
                         ></div>
-                        <div>{data.name}</div>
+                        <div
+                          className={styles.dataName}
+                          onClick={() => {
+                            router.push(`detail/${data.id}`);
+                          }}
+                        >
+                          {data.name}
+                        </div>
                       </div>
                     </div>
                   )
