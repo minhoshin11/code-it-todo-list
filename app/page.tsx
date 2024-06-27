@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import instance from "./api/axios";
 import { getItems } from "./api/function";
 import Nav from "./components/nav/nav";
 import PostInput from "./components/post-input/post-input";
+import { toggleCheck } from "./hooks/toggle_check";
 import styles from "./page.module.css";
 
 export interface GetDataName {
@@ -25,18 +26,11 @@ export default function Home() {
   }, []);
   console.log(getData, "겟데이터임");
 
-  async function checkList(isCompleted: any, dataId: number) {
-    const completed = isCompleted ? false : true;
-    try {
-      const id: string = "신민호";
-      const response = await instance.patch(`${id}/items/${dataId}`, {
-        isCompleted: completed,
-      });
-      console.log(response.data);
-    } catch {
-      console.log("체크 실패!");
-    }
-  }
+  const checkFalseCompleted =
+    Array.isArray(getData) && getData.some((data) => !data.isCompleted);
+
+  const checkTrueCompleted =
+    Array.isArray(getData) && getData.some((data) => data.isCompleted);
 
   return (
     <div>
@@ -46,7 +40,20 @@ export default function Home() {
         <div className={styles.listWrapper}>
           <div className={styles.leftMyTodo}>
             <div className={styles.todo}>TO DO</div>
-            {Array.isArray(getData) &&
+
+            {!checkFalseCompleted ? (
+              <div className={styles.noTodoWrapper}>
+                <Image
+                  alt="TODO 이미지"
+                  src="/image/todo-large.svg"
+                  width={150}
+                  height={150}
+                />
+                <div>할일이 없어요.</div>
+                <div>TODO를 새롭게 추가해보세요!</div>
+              </div>
+            ) : (
+              Array.isArray(getData) &&
               getData.map(
                 (data: GetDataName) =>
                   data.isCompleted === false && (
@@ -55,7 +62,7 @@ export default function Home() {
                         <div
                           className={styles.checkBox}
                           onClick={() => {
-                            checkList(data.isCompleted, data.id);
+                            toggleCheck(data.isCompleted, data.id);
                           }}
                         ></div>
                         <div
@@ -69,35 +76,57 @@ export default function Home() {
                       </div>
                     </div>
                   )
-              )}
+              )
+            )}
           </div>
 
           <div className={styles.RightMyTodo}>
-            <div className={styles.todo}>Done</div>
-            {Array.isArray(getData) &&
+            <div className={styles.done}>DONE</div>
+            {!checkTrueCompleted ? (
+              <div className={styles.noTodoWrapper}>
+                <Image
+                  alt="TODO 이미지"
+                  src="/image/done-large.svg"
+                  width={150}
+                  height={150}
+                />
+                <div>아직 다 한 일이 없어요.</div>
+                <div>해야 할 일을 체크해보세요!</div>
+              </div>
+            ) : (
+              Array.isArray(getData) &&
               getData.map(
                 (data: GetDataName) =>
                   data.isCompleted === true && (
                     <div key={data.id} className={styles.rightMyTodo}>
-                      <div className={styles.contentWrapper}>
+                      <div className={styles.rightContentWrapper}>
                         <div
-                          className={styles.checkBox}
+                          className={styles.doneCheckBoxWrapper}
                           onClick={() => {
-                            checkList(data.isCompleted, data.id);
+                            toggleCheck(data.isCompleted, data.id);
                           }}
-                        ></div>
+                        >
+                          <Image
+                            src="/image/checked.svg"
+                            alt="image"
+                            width={32}
+                            height={32}
+                          />
+                        </div>
+
                         <div
                           className={styles.dataName}
                           onClick={() => {
                             router.push(`detail/${data.id}`);
                           }}
                         >
-                          {data.name}
+                          <span className={styles.underline}>{data.name}</span>
                         </div>
                       </div>
                     </div>
                   )
-              )}
+              )
+            )}
           </div>
         </div>
       </div>

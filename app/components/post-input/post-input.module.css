@@ -1,27 +1,39 @@
 .postInputContainer {
   display: flex;
   justify-content: center;
-  gap: 2vw;
   width: 100vw;
 }
 
 .postInput {
-  width: 80vw;
+  width: 65vw;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  margin-right: 10px;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.postSubmit {
+  width: 20vw;
   height: 56px;
   box-sizing: border-box;
   border-radius: 15px;
   border: 1px solid black;
-  margin-right: 2vw;
-}
-
-.postSubmit {
-  width: 9vw;
-  height: 56px;
-  box-sizing: border-box;
-  border-radius: 15px;
-  border: 1px solid black;
-}
-
-.postSubmit {
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  position: relative;
   cursor: pointer;
+  font-size: 16px;
+}
+
+@media (min-width: 481px) {
+  .postSubmit::after {
+    content: " 추가하기";
+    color: black;
+
+    padding-left: 5px; /* 필요에 따라 조정 */
+  }
 }

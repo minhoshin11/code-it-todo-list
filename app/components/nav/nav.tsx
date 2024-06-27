@@ -11,8 +11,7 @@ export default function Nav() {
           router.push("/");
         }}
       >
-        <div>사진</div>
-        <div>do it;</div>
+        <img src="/image/Size=Large.svg" alt="" />
       </div>
     </div>
   );

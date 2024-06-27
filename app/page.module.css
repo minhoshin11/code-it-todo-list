@@ -1,38 +1,62 @@
 .listWrapper {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .postWrapper {
-  padding: 30px 30px;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .listWrapper {
-  width: 100%;
   display: flex;
-  gap: 10px;
+  width: 87vw;
   margin-top: 30px;
+  margin-left: 1vw;
 }
 .leftMyTodo,
 .RightMyTodo {
-  width: 100%;
+  width: 45vw;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.todo {
+.todo,
+.done {
   width: 80px;
   height: 35px;
-  background-color: #bef264;
   box-sizing: border-box;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   justify-content: center;
   border-radius: 17px;
   display: flex;
   align-items: center;
 }
+.todo {
+  background-color: #bef264;
+  color: #15803d;
+}
+.done {
+  background-color: #15803d;
+  color: #fcd34d;
+}
 
-.contentWrapper {
+.noTodoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #94a3b8;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.contentWrapper,
+.rightContentWrapper {
   display: flex;
   gap: 15px;
   box-sizing: border-box;
@@ -42,17 +66,35 @@
   padding: 10px;
 }
 
-.contentWrapper div {
+.contentWrapper div,
+.rightContentWrapper div {
   display: flex;
   align-items: center;
 }
+
+.rightContentWrapper {
+  background-color: #ede9fe;
+}
+
+.doneCheckBoxWrapper:hover {
+  cursor: pointer;
+}
+
 .checkBox {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   box-sizing: border-box;
   border-radius: 50%;
   border: 1px solid black;
   background-color: #f7f8e0;
+}
+
+/* background-color: #ede9fe; */
+
+.underline {
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px; /* Optional: Adjust the thickness of the underline */
 }
 
 .dataName:hover,
@@ -62,4 +104,18 @@
 
 .RightMyTodo Todo {
   background-color: black;
+}
+
+@media (max-width: 768px) {
+  .listWrapper {
+    flex-direction: column;
+  }
+
+  .RightMyTodo,
+  .leftMyTodo {
+    width: 100%;
+  }
+  .done {
+    margin-top: 15px;
+  }
 }
