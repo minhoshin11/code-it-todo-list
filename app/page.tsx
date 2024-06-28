@@ -17,18 +17,17 @@ export interface GetDataName {
 
 export default function Home() {
   const [getData, setGetData] = useState<GetDataName[] | null>(null);
-  const [checkItem, setCheckItem] = useState<number>(0);
-  const [checked, setChecked] = useState<boolean>(false);
+
   const router = useRouter();
 
   //투두 목록 데이터 받기
   useEffect(() => {
     getItems(setGetData);
   }, []);
-
+  //체크여부 확인
   const checkFalseCompleted =
     Array.isArray(getData) && getData.some((data) => !data.isCompleted);
-
+  //체크여부 확인
   const checkTrueCompleted =
     Array.isArray(getData) && getData.some((data) => data.isCompleted);
 
