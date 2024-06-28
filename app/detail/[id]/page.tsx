@@ -35,7 +35,6 @@ export default function Detail() {
       setContent(response.data.memo || "");
       setIsCompleted(response.data.isCompleted || false);
       setMemoId(response.data.id);
-      console.log(response.data);
     } catch (error) {
       console.log("data 가져오기 실패!", error);
     }
