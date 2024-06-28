@@ -4,3 +4,12 @@ export interface FormDataType {
   imageUrl?: string;
   isCompleted: boolean;
 }
+
+export interface getDataFromDetail {
+  id: number;
+  imageUrl: string;
+  isCompleted: boolean;
+  memo: string;
+  name: string;
+  tenantId: string;
+}

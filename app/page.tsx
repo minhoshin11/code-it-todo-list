@@ -21,10 +21,10 @@ export default function Home() {
   const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
 
+  //투두 목록 데이터 받기
   useEffect(() => {
     getItems(setGetData);
   }, []);
-  console.log(getData, "겟데이터임");
 
   const checkFalseCompleted =
     Array.isArray(getData) && getData.some((data) => !data.isCompleted);
@@ -37,6 +37,8 @@ export default function Home() {
       <Nav />
       <div className={styles.postWrapper}>
         <PostInput />
+
+        {/* TODO 목록 */}
         <div className={styles.listWrapper}>
           <div className={styles.leftMyTodo}>
             <div className={styles.todo}>TO DO</div>
@@ -79,7 +81,7 @@ export default function Home() {
               )
             )}
           </div>
-
+          {/* DONE 목록 */}
           <div className={styles.RightMyTodo}>
             <div className={styles.done}>DONE</div>
             {!checkTrueCompleted ? (

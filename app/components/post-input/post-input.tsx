@@ -11,7 +11,7 @@ export default function PostInput() {
     event.preventDefault(); // 폼 제출의 기본 동작을 막음
     if (newText !== "") {
       try {
-        const id: string = "신민호";
+        const id: string = "minhoshin";
         const newItem = { name: newText }; // 새로운 아이템 객체 생성
         const response = await instance.post(`${id}/items`, newItem);
         console.log(response.data);

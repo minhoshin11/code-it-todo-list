@@ -6,9 +6,9 @@ import instance from "./axios";
 
 export async function getItems(setGetData: any) {
   try {
-    const id: string = "신민호";
+    const id: string = "minhoshin";
     const response = await instance.get(`${id}/items`);
-    console.log(response.data);
+
     setGetData(response.data);
   } catch {
     console.log("에러임");
@@ -17,9 +17,8 @@ export async function getItems(setGetData: any) {
 
 export async function getOneItems(itemid: string) {
   try {
-    const id: string = "신민호";
+    const id: string = "minhoshin";
     const response = await instance.get(`${id}/items/${itemid}`);
-    console.log(response.data);
     return response.data;
   } catch {
     console.log("에러임");

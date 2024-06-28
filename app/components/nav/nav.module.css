@@ -14,3 +14,15 @@
 .navContainer :hover {
   cursor: pointer;
 }
+.smallLogoWrapper {
+  display: none;
+}
+
+@media (max-width: 481px) {
+  .smallLogoWrapper {
+    display: flex;
+  }
+  .largeLogoWrapper {
+    display: none;
+  }
+}
