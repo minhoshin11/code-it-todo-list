@@ -2,7 +2,7 @@
 import instance from "@/app/api/axios";
 import { useState } from "react";
 import styles from "./post-input.module.css";
-
+//메인페이지에서 목록을 추가하는 인풋창
 export default function PostInput() {
   const [newText, setNewText] = useState("");
   const [response, setResponse] = useState(null);

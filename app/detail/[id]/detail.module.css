@@ -19,7 +19,7 @@
   border: 1px solid black;
   border-radius: 20px;
   gap: 10px;
-  padding-left: 100px;
+  padding-left: 240px;
   /* padding-left: 15vw; */
 }
 .doneContentTitle {
@@ -109,9 +109,9 @@
 .doneDetailInput,
 .detailMemo {
   font-size: 20px;
-  width: auto;
+  width: 400px;
   height: auto;
-  /* margin-bottom: 60px; */
+  /* margin-bottom: 60px; *
   justify-content: center;
   /* flex-wrap: wrap; */
   border: none;
